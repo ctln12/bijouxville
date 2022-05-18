@@ -18,3 +18,9 @@
     </li>
   <% end %>
 </ol>
+
+<ul id="jewels">
+  <% @jewels.each do |jewel| %>
+    <li><%= link_to jewel.name, jewel_path(jewel) %></li>
+  <% end %>
+</ul>

@@ -1,3 +1,3 @@
 class Jeweler < ApplicationRecord
-  has_many :jewels
+  has_many :jewels, dependent: :destroy
 end
