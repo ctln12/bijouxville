@@ -1,0 +1,13 @@
+<p><%= Jeweler.count %> <%= 'jeweler'.pluralize(Jeweler.count) %></p>
+
+<ol id="stones">
+  <% Stone.all.each do |stone| %>
+    <li><%= stone.name %></li>
+  <% end %>
+</ol>
+
+<ol id="materials">
+  <% Material.all.each do |material| %>
+    <li><%= material.name %></li>
+  <% end %>
+</ol>
