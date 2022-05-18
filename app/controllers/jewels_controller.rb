@@ -8,8 +8,7 @@ class JewelsController < ApplicationController
   end
 
   def destroy
-    @jewel = Jewel.find(params[:id])
-    @jewel.destroy
+    JewelDestroyer.call(params[:id])
 
     redirect_to root_path, status: :see_other
   end

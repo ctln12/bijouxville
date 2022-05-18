@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_17_180149) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_18_224207) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_17_180149) do
     t.datetime "updated_at", null: false
     t.index ["jewel_id"], name: "index_jewel_materials_on_jewel_id"
     t.index ["material_id"], name: "index_jewel_materials_on_material_id"
+  end
+
+  create_table "jewel_stats", force: :cascade do |t|
+    t.date "date"
+    t.integer "total_quantity"
+    t.decimal "total_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "jewel_stones", force: :cascade do |t|

@@ -9,7 +9,7 @@ RSpec.describe 'Users can delete a jewel', type: :feature do
     JewelStone.create!(jewel: ring, stone: ruby)
     JewelMaterial.create!(jewel: ring, material: gold)
     jeweler_count = Jeweler.count
-    jewel_count = Jewel.count
+    JewelStat.create!(date: Date.today, total_quantity: Jewel.count) # missing total_price
     expected_stones = Stone.all.map(&:name)
     expected_materials = Material.all.map(&:name)
     visit root_path
@@ -19,8 +19,9 @@ RSpec.describe 'Users can delete a jewel', type: :feature do
     end
     click_link 'Delete'
 
+    stats = JewelStat.find_by(date: Date.today)
     page.find('p', exact_text: "#{jeweler_count} #{'jeweler'.pluralize(jeweler_count)}")
-    page.find('p', exact_text: "#{jewel_count - 1} #{'jewel'.pluralize(jewel_count - 1)}")
+    page.find('p', exact_text: "#{stats.total_quantity} #{'jewel'.pluralize(stats.total_quantity)}")
     within('ol#stones') do
       actual_stones = all('li span.name').map(&:text)
       expect(actual_stones).to match_array(expected_stones)
