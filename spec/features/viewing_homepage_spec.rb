@@ -11,16 +11,16 @@ RSpec.describe 'Users can view the homepage', type: :feature do
 
     visit root_path
 
-    page.find('p', exact_text: "#{Jeweler.count} #{'jeweler'.pluralize(Jeweler.count)}")
-    within('ol#stones') do
-      expected_stones = Stone.all.map(&:name)
-      actual_stones = all('li span.name').map(&:text)
-      expect(actual_stones).to match_array(expected_stones)
-    end
-    within('ol#materials') do
+    page.find('table#total-jewelers td', exact_text: Jeweler.count)
+    within('table#materials') do
       expected_materials = Material.all.map(&:name)
-      actual_materials = all('li span.name').map(&:text)
+      actual_materials = all('td:first-child').map(&:text)
       expect(actual_materials).to match_array(expected_materials)
+    end
+    within('table#stones') do
+      expected_stones = Stone.all.map(&:name)
+      actual_stones = all('td:first-child').map(&:text)
+      expect(actual_stones).to match_array(expected_stones)
     end
   end
 end

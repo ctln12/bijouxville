@@ -1,0 +1,56 @@
+<h1>Bijouxville</h1>
+
+<table id="total-jewelers">
+  <tr>
+    <th>Total Jewelers</th>
+  </tr>
+  <tr>
+    <td><%= Jeweler.count %></td>
+  </tr>
+ </table>
+
+<table id="total-jewels">
+  <tr>
+    <th>Total Jewels </th>
+  </tr>
+  <tr>
+    <td><%= Jewel.count %></td>
+  </tr>
+ </table>
+
+ <table id="materials">
+  <tr>
+    <th>Materials </th>
+    <th>Total </th>
+  </tr>
+  <% Material.all.each do |material| %>
+    <tr>
+      <td><%= material.name %></td>
+      <td><%= JewelMaterial.where(material: material).count %></td>
+    </tr>
+  <% end %>
+ </table>
+
+ <table id="stones">
+  <tr>
+    <th>Stones </th>
+    <th>Total </th>
+  </tr>
+  <% Stone.all.each do |stone| %>
+    <tr>
+      <td><%= stone.name %></td>
+      <td><%= JewelStone.where(stone: stone).count %></td>
+    </tr>
+  <% end %>
+ </table>
+
+<table id="jewels">
+  <tr>
+    <th>Jewels </th>
+  </tr>
+  <% Jewel.all.each do |jewel| %>
+    <tr>
+      <td><%= link_to jewel.name, jewel_path(jewel) %></td>
+    </tr>
+  <% end %>
+ </table>

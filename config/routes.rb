@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root 'jewels#index'
+  root 'pages#home'
 
-  resources :jewels, only: %i[show destroy]
+  resources :jewels, only: %i[index show destroy]
 end

@@ -8,27 +8,25 @@ RSpec.describe 'Users can delete a jewel', type: :feature do
     ring = Jewel.create!(name: 'Ring', jeweler: chopard)
     JewelStone.create!(jewel: ring, stone: ruby)
     JewelMaterial.create!(jewel: ring, material: gold)
-    jeweler_count = Jeweler.count
     JewelStat.create!(date: Date.today, total_quantity: Jewel.count) # missing total_price
-    expected_stones = Stone.all.map(&:name)
+    jeweler_count = Jeweler.count
     expected_materials = Material.all.map(&:name)
+    expected_stones = Stone.all.map(&:name)
     visit root_path
 
-    within('ul#jewels') do
-      click_link 'Ring'
-    end
+    click_link ring.name
     click_link 'Delete'
 
-    stats = JewelStat.find_by(date: Date.today)
-    page.find('p', exact_text: "#{jeweler_count} #{'jeweler'.pluralize(jeweler_count)}")
-    page.find('p', exact_text: "#{stats.total_quantity} #{'jewel'.pluralize(stats.total_quantity)}")
-    within('ol#stones') do
-      actual_stones = all('li span.name').map(&:text)
-      expect(actual_stones).to match_array(expected_stones)
-    end
-    within('ol#materials') do
-      actual_materials = all('li span.name').map(&:text)
+    jewel_stats = JewelStat.find_by(date: Date.today)
+    page.find('table#total-jewelers td', exact_text: jeweler_count)
+    page.find('table#total-jewels td', exact_text: jewel_stats.total_quantity)
+    within('table#materials') do
+      actual_materials = all('td:first-child').map(&:text)
       expect(actual_materials).to match_array(expected_materials)
+    end
+    within('table#stones') do
+      actual_stones = all('td:first-child').map(&:text)
+      expect(actual_stones).to match_array(expected_stones)
     end
   end
 end
