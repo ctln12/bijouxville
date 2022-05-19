@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   resources :jewels, only: %i[index show destroy]
+  resources :jewelers, only: :index
+  resources :materials, only: :index
+  resources :stones, only: :index
 end

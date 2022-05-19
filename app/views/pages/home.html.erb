@@ -2,7 +2,7 @@
 
 <table id="total-jewelers">
   <tr>
-    <th>Total Jewelers</th>
+    <th><%= link_to "Total Jewelers", jewelers_path %></th>
   </tr>
   <tr>
     <td><%= Jeweler.count %></td>
@@ -20,7 +20,7 @@
 
  <table id="materials">
   <tr>
-    <th>Materials </th>
+    <th><%= link_to "Materials", materials_path %> </th>
     <th>Total </th>
   </tr>
   <% Material.all.each do |material| %>
@@ -33,7 +33,7 @@
 
  <table id="stones">
   <tr>
-    <th>Stones </th>
+    <th><%= link_to "Stones", stones_path %> </th>
     <th>Total </th>
   </tr>
   <% Stone.all.each do |stone| %>

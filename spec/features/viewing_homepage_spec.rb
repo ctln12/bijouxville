@@ -22,5 +22,8 @@ RSpec.describe 'Users can view the homepage', type: :feature do
       actual_stones = all('td:first-child').map(&:text)
       expect(actual_stones).to match_array(expected_stones)
     end
+    expect(page).to have_link('Total Jewelers', href: jewelers_path)
+    expect(page).to have_link('Materials', href: materials_path)
+    expect(page).to have_link('Stones', href: stones_path)
   end
 end
