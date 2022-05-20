@@ -4,6 +4,7 @@ class AppInitializer < ApplicationService
     seed_materials
     seed_stones
     add_jewels(jeweler)
+    JewelStat.create!(date: Date.today, total_quantity: Jewel.count)
   end
 
   private

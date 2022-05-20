@@ -2,12 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Users can view the homepage', type: :feature do
   scenario 'with jewelers, stones and materials details' do
-    gold = Material.create!(name: 'Gold')
-    ruby = Stone.create!(name: 'Ruby')
-    chopard = Jeweler.create!(name: 'Chopard')
-    ring = Jewel.create!(name: 'Ring', jeweler: chopard)
-    JewelStone.create!(jewel: ring, stone: ruby)
-    JewelMaterial.create!(jewel: ring, material: gold)
+    AppInitializer.call
 
     visit root_path
 

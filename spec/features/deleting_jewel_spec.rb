@@ -2,19 +2,13 @@ require 'rails_helper'
 
 RSpec.describe 'Users can delete a jewel', type: :feature do
   scenario 'successfully' do
-    gold = Material.create!(name: 'Gold')
-    ruby = Stone.create!(name: 'Ruby')
-    chopard = Jeweler.create!(name: 'Chopard')
-    ring = Jewel.create!(name: 'Ring', jeweler: chopard)
-    JewelStone.create!(jewel: ring, stone: ruby)
-    JewelMaterial.create!(jewel: ring, material: gold)
-    JewelStat.create!(date: Date.today, total_quantity: Jewel.count) # missing total_price
+    AppInitializer.call
     jeweler_count = Jeweler.count
     expected_materials = Material.all.map(&:name)
     expected_stones = Stone.all.map(&:name)
     visit root_path
 
-    click_link ring.name
+    click_link Jewel.last.name
     click_link 'Delete'
 
     jewel_stats = JewelStat.find_by(date: Date.today)
