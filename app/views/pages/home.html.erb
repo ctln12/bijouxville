@@ -1,5 +1,6 @@
 <h1>Bijouxville</h1>
 
+<h2>Totals</h2>
 <table id="total-jewelers">
   <tr>
     <th><%= link_to "Total Jewelers", jewelers_path %></th>
@@ -18,10 +19,11 @@
   </tr>
  </table>
 
+<h2>Jewels per material</h2>
  <table id="materials">
   <tr>
     <th><%= link_to "Materials", materials_path %> </th>
-    <th>Total </th>
+    <th>Quantity </th>
   </tr>
   <% Material.all.each do |material| %>
     <tr>
@@ -31,10 +33,11 @@
   <% end %>
  </table>
 
+<h2>Jewels per stones</h2>
  <table id="stones">
   <tr>
     <th><%= link_to "Stones", stones_path %> </th>
-    <th>Total </th>
+    <th>Quantity </th>
   </tr>
   <% Stone.all.each do |stone| %>
     <tr>
@@ -44,6 +47,7 @@
   <% end %>
  </table>
 
+<h2>All jewels</h2>
 <table id="jewels">
   <tr>
     <th>Jewels </th>
