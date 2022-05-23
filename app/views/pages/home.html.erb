@@ -24,11 +24,13 @@
   <tr>
     <th><%= link_to "Materials", materials_path %> </th>
     <th>Quantity </th>
+    <th>Value </th>
   </tr>
   <% Material.all.each do |material| %>
     <tr>
       <td><%= material.name %></td>
-      <td><%= JewelMaterial.where(material: material).count %></td>
+      <td><%= @jewel_stats.per_material[material.name]["quantity"] %></td>
+      <td><%= @jewel_stats.per_material[material.name]["value"] %></td>
     </tr>
   <% end %>
  </table>
@@ -38,11 +40,13 @@
   <tr>
     <th><%= link_to "Stones", stones_path %> </th>
     <th>Quantity </th>
+    <th>Value </th>
   </tr>
   <% Stone.all.each do |stone| %>
     <tr>
       <td><%= stone.name %></td>
-      <td><%= JewelStone.where(stone: stone).count %></td>
+      <td><%= @jewel_stats.per_stone[stone.name]["quantity"] %></td>
+      <td><%= @jewel_stats.per_stone[stone.name]["value"] %></td>
     </tr>
   <% end %>
  </table>
@@ -51,10 +55,12 @@
 <table id="jewels">
   <tr>
     <th>Jewels </th>
+    <th>Price </th>
   </tr>
   <% Jewel.all.each do |jewel| %>
     <tr>
       <td><%= link_to jewel.name, jewel_path(jewel) %></td>
+      <td><%= jewel.material.base_cost + jewel.stones.map { |stone| stone.price }.sum %></td>
     </tr>
   <% end %>
  </table>

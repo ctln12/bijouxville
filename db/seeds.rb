@@ -11,5 +11,6 @@ Material.destroy_all
 Stone.destroy_all
 JewelMaterial.destroy_all
 JewelStone.destroy_all
+JewelStat.destroy_all
 
 AppInitializer.call
