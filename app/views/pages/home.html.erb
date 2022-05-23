@@ -13,9 +13,11 @@
 <table id="total-jewels">
   <tr>
     <th>Total Jewels </th>
+    <th>Total Price</th>
   </tr>
   <tr>
     <td><%= @jewel_stats.total_quantity %></td>
+    <td><%= @jewel_stats.total_price %></td>
   </tr>
  </table>
 
@@ -60,7 +62,7 @@
   <% Jewel.all.each do |jewel| %>
     <tr>
       <td><%= link_to jewel.name, jewel_path(jewel) %></td>
-      <td><%= jewel.material.base_cost + jewel.stones.map { |stone| stone.price }.sum %></td>
+      <td><%= jewel.price %></td>
     </tr>
   <% end %>
  </table>

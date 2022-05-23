@@ -7,6 +7,7 @@ class AppInitializer < ApplicationService
     JewelStat.create!(
       date: Date.today,
       total_quantity: Jewel.count,
+      total_price: Jewel.all.map(&:price).sum,
       per_material: jewels_per_material,
       per_stone: jewels_per_stone
     )
@@ -34,6 +35,8 @@ class AppInitializer < ApplicationService
       a_jewel = Jewel.create!(name: jewel, jeweler: jeweler)
       JewelMaterial.create!(jewel: a_jewel, material: Material.all.sample)
       JewelStone.create!(jewel: a_jewel, stone: Stone.all.sample)
+      price = a_jewel.material.base_cost + a_jewel.stones.map(&:price).sum
+      a_jewel.update!(price: price)
     end
   end
 

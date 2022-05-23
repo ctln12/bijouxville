@@ -7,7 +7,7 @@ RSpec.describe 'Users can view jewels statistics', type: :feature do
     visit root_path
 
     jewel_stats = JewelStat.find_by(date: Date.today)
-    page.find('table#total-jewels td', exact_text: jewel_stats.total_quantity)
+    page.find('table#total-jewels td:nth-child(1)', exact_text: jewel_stats.total_quantity)
     within('table#materials') do
       expected_materials = Material.all.map { |material| "#{material.name} #{jewel_stats.per_material[material.name]['quantity']} #{jewel_stats.per_material[material.name]['value']}" }
       actual_materials = all('tr:not(:first-child)').map(&:text)

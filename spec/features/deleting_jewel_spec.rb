@@ -13,7 +13,7 @@ RSpec.describe 'Users can delete a jewel', type: :feature do
 
     jewel_stats = JewelStat.find_by(date: Date.today)
     page.find('table#total-jewelers td', exact_text: jeweler_count)
-    page.find('table#total-jewels td', exact_text: jewel_stats.total_quantity)
+    page.find('table#total-jewels td:nth-child(1)', exact_text: jewel_stats.total_quantity)
     within('table#materials') do
       actual_materials = all('td:first-child').map(&:text)
       expect(actual_materials).to match_array(expected_materials)
